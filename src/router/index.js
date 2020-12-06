@@ -18,7 +18,8 @@ const routes = [
     path: '/film/:id',
     name: 'film',
   
-    component: Film
+    component: Film,
+    props: true,
   },
   {
     path: '/people',

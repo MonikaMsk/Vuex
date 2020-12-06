@@ -103,7 +103,7 @@ margin: 10 px;
     opacity: 0.9;
     margin-left: 400px;
     margin-right: 400px;
-    padding: 
+    
   
 }
 

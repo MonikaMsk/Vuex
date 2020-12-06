@@ -10,60 +10,48 @@ export default new Vuex.Store({
   state: {
 
     films: [],
-    film: [],
+    film: null,
   
   
   },
   mutations: {
 
-   
-    async getFilms(state) {
-      state.films = [],
-      
-      await axios.get('https://ghibliapi.herokuapp.com/films')
-      .then((result) =>{
-         
-
-result.data.forEach(element => {
-
-         state.films.push(element)
+    SET_FILMS(state,films){
+      state.films = films
+    },
 
 
-        });
+  SET_FILM(state, film){
+    state.film = film
+  }
+
+  },
+  actions: {
+
+
+  async getFilms({commit}){
+    await axios.get('https://ghibliapi.herokuapp.com/films')
+    .then((result) =>{
+      commit('SET_FILMS', result.data)
 
       })
       .catch((error) => {
           console.log(error)
       })
-    },
-    
-  async getFilm(state,id) {
-
-    state.film = []
-    await   axios.get(`https://ghibliapi.herokuapp.com/films/${id}`)
-        .then((result)=>{
-       
-          state.film.push(result.data)
-         
-
-        })
-        .catch((error)=>{
-            console.log(error);
-        })
   },
 
 
+async getFilm({commit}, id){
+  await axios.get(`https://ghibliapi.herokuapp.com/films/${id}`)
+  .then((result) =>{
+    commit('SET_FILM', result.data)
 
-  },
-  actions: {
-
-    getFilms: context => {
-      context.commit('getFilms')
-    },
-
-    getFilm(context,id){
-      context.commit('getFilm',id)
-    }
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+ 
 
   },
   modules: {

@@ -3,11 +3,11 @@
             
         <h3>Film's info</h3>
         <div class="film">
-        <div v-for="f in film" :key="f.id">
+        <div >
             <div class="text">
-          <h3>  Title: {{f.title}} </h3>
-          <h3> Director: {{f.director}}</h3> 
-           <h4> {{f.description}} </h4>
+          <h3>  Title: {{film.title}} </h3>
+          <h3> Director: {{film.director}}</h3> 
+           <h4> {{film.description}} </h4>
         </div>
         </div>
 </div>
@@ -19,20 +19,15 @@
 import { mapState } from 'vuex';
 export default {
     name: 'Film',
+    props: ['id'],
     
 
-    computed: {
-        ...mapState({
-            film: state => state.film,
-            
-        })
-    },
+    computed: mapState(['film']),
+
 
 mounted(){
-    this.$store.dispatch('getFilm', this.$route.params.id)
-   console.log(this.$route.params.id)
-},
-
+     this.$store.dispatch('getFilm', this.id)
+}
   
 }
 </script>

@@ -19,13 +19,7 @@ export default {
 
   props: ['title'],
 
-  computed: {
-    ...mapState({
-      films: (state) => state.films,
-
-      
-    }),
-  },
+ computed: mapState(['films']),
 
   mounted() {
     this.$store.dispatch("getFilms");
